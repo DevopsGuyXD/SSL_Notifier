@@ -35,11 +35,3 @@ func InitAws(){
 	})
 	CheckForMajorErr(err)
 }
-
-func InitAzure(){
-	InitEnvFile()
-
-	_, err := exec.Command("az", "login", "--service-principal", "-u", os.Getenv("CLIENT_ID"), "-p", os.Getenv("SECRET_VALUE"), "--tenant", os.Getenv("TENANT_ID")).Output(); if err != nil{
-		log.Println(err)
-	}
-}
