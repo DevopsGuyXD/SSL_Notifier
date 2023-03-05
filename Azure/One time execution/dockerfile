@@ -1,0 +1,37 @@
+FROM alpine:latest as alpine
+    RUN apk --no-cache add tzdata zip ca-certificates
+
+FROM golang:1.19-alpine as builder
+WORKDIR /go/src/app
+
+    COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+    COPY . .
+
+    RUN go mod init "github.com/DevopsGuyXD/SSL_Notifier"
+    RUN go get -u
+    RUN go mod tidy
+    RUN GOOS="linux" go build .
+
+FROM golang:1.19-alpine
+WORKDIR /go/src/app
+
+    ENV CLIENT_ID=""
+    ENV TENANT_ID=""
+    ENV SECRET_VALUE=""
+    ENV EMAIL_SENDER_ID=""
+    ENV EMAIL_SENDER_PASSWORD=""
+    ENV RECEIPIENT_MAIN=""
+    ENV RECEIPIENT_CC_1=""
+    ENV RECEIPIENT_CC_2=""
+
+    COPY --from=builder /go/src/app/SSL_Notifier .
+    COPY --from=builder /go/src/app/go.mod .
+    COPY --from=builder /go/src/app/.env .
+
+    RUN apk update
+    RUN apk add bash py-pip
+    RUN apk add --no-cache -q --virtual=build gcc musl-dev python3-dev libffi-dev openssl-dev cargo make
+    RUN pip install --no-cache-dir azure-cli -q
+    RUN apk del --purge build
+
+    ENTRYPOINT ["/go/src/app/SSL_Notifier"]
