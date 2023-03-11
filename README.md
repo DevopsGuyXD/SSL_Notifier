@@ -17,7 +17,7 @@
 
     docker run --rm -e ACCESS_KEY_ID=" " -e ACCESS_KEY_SECRET=" " -e AWS_REGION=" " -e EMAIL_SENDER_ID=" " -e EMAIL_SENDER_PASSWORD=" " -e RECEIPIENT_MAIN=" " -e RECEIPIENT_CC_1=" " -e RECEIPIENT_CC_2=" " -e CRON="* * * * *" devopsguyxd/sslnotifier:aws-cron
     
-![2023-03-11 21_30_42-Window](https://user-images.githubusercontent.com/77780574/224494665-bcd83d2d-486b-43b1-bcae-1d4ea78911b5.png)
+![2023-03-11 21_30_42-Window](https://user-images.githubusercontent.com/77780574/224494726-48f26a04-1905-4f66-8cdc-061d3bd247ab.png)
 
 <p><b>AZURE:</b></p>
 
