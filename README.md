@@ -17,8 +17,8 @@
 
     docker run --rm -e ACCESS_KEY_ID=" " -e ACCESS_KEY_SECRET=" " -e AWS_REGION=" " -e EMAIL_SENDER_ID=" " -e EMAIL_SENDER_PASSWORD=" " -e RECEIPIENT_MAIN=" " -e RECEIPIENT_CC_1=" " -e RECEIPIENT_CC_2=" " -e CRON="* * * * *" devopsguyxd/sslnotifier:aws-cron
     
-![2023-03-02 12_23_31-SSL renewal reminder - AWS - bharath dundi@nowfloats com - NowFloats Technologie](https://user-images.githubusercontent.com/77780574/222512543-a5e77b11-b248-4ff2-bb44-9b48c6b3e2de.png)
- 
+![2023-03-11 21_30_42-Window](https://user-images.githubusercontent.com/77780574/224494665-bcd83d2d-486b-43b1-bcae-1d4ea78911b5.png)
+
 <p><b>AZURE:</b></p>
 
 <p>One time execution:</p>
