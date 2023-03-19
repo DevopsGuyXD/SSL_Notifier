@@ -6,6 +6,7 @@ import (
 	"math"
 	"os"
 	"os/exec"
+	"strings"
 	"time"
 
 	util "github.com/DevopsGuyXD/SSL_Notifier/Utils"
@@ -35,12 +36,12 @@ func GetDaysLeftForExpiryAWS(cert_id []string, cert_domain_name []string, expiry
 
 		days_till_expiry := DaysToExpireAWS(i, expiry_date)
 
-		if !math.Signbit(float64(days_till_expiry)) && days_till_expiry < 15 {
+		if !math.Signbit(float64(days_till_expiry)) && days_till_expiry < 365 {
 			SendNotificationAWS(cert_id[i], cert_domain_name[i], days_till_expiry)
 		}
 	}
 
-	fmt.Println("Completed successfully")
+	fmt.Println("\nCompleted successfully")
 }
 
 // ================================= Send notification =================================
@@ -52,22 +53,26 @@ func SendNotificationAWS(cert_arn string, cert_domain_name string, days_till_exp
 	
 	email := gomail.NewMessage()
 
-	email_subject := "SSL renewal reminder - AWS"
-	email_body := fmt.Sprintf("<h4>%v</h4>%v<br><br><b>Account_ID:</b> %v<br><b>Certificate_ARN:</b> %v<br><b>Certificate_Domain:</b> %v<br><h1 style=`text-align:center;font-size:80px;color:#FF9900;`>%v<div style=`font-size:20px;color:black;`>Days to expire</div></h1>","Greetings user,","The below certificate is due for renewal. Please take the necessary action at the earliest.",string(account_id),cert_arn,cert_domain_name,days_till_expiry)
-	email_connection := os.Getenv("EMAIL_CONNECTION")
-	port := 587
+	recipients := os.Getenv("RECEIPIENTS")
+	recipients_parsed := strings.Split(recipients,",")
 
-	email.SetHeader("From", os.Getenv("EMAIL_SENDER_ID"))
-	email.SetHeader("To", os.Getenv("RECEIPIENT_MAIN"))
-	email.SetHeader("Cc", os.Getenv("RECEIPIENT_CC_1"), os.Getenv("RECEIPIENT_CC_2"))
-	email.SetHeader("Subject", email_subject)
-	email.SetBody("text/html", email_body)
+	for i := 0; i < len(recipients_parsed); i++{
+		email_subject := "SSL renewal reminder - AWS"
+		email_body := fmt.Sprintf("<h4>%v</h4>%v<br><br><b>Account_ID:</b> %v<br><b>Certificate_ARN:</b> %v<br><b>Certificate_Domain:</b> %v<br><h1 style=`text-align:center;font-size:80px;color:#FF9900;`>%v<div style=`font-size:20px;color:black;`>Days to expire</div></h1>","Greetings user,","The below certificate is due for renewal. Please take the necessary action at the earliest.",string(account_id),cert_arn,cert_domain_name,days_till_expiry)
+		email_connection := os.Getenv("EMAIL_CONNECTION")
+		port := 587
 
-	d := gomail.NewDialer(email_connection, port, os.Getenv("EMAIL_SENDER_ID"), os.Getenv("EMAIL_SENDER_PASSWORD"))
+		email.SetHeader("From", os.Getenv("EMAIL_SENDER_ID"))
+		email.SetHeader("To", recipients_parsed[i])
+		email.SetHeader("Subject", email_subject)
+		email.SetBody("text/html", email_body)
 
-	d.TLSConfig = &tls.Config{InsecureSkipVerify: true}
+		d := gomail.NewDialer(email_connection, port, os.Getenv("EMAIL_SENDER_ID"), os.Getenv("EMAIL_SENDER_PASSWORD"))
 
-	err = d.DialAndSend(email); util.CheckForMajorErr(err)
+		d.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 
-	fmt.Printf("%v: Notification sent\n", cert_arn)
+		err = d.DialAndSend(email); util.CheckForMajorErr(err)
+
+		fmt.Printf("%v: Notification sent\n", cert_arn)
+	}
 }

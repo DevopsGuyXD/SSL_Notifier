@@ -18,12 +18,14 @@ type certificateSummaryList struct {
 	DomainName     string `json:"domainName,omitempty"`
 }
 
+
 // ================================= AWS Structs Methods ==================================
 func (ac All_Certificates) TotalNummberOfCertificates() int{
 
 	total_num_certs := len(ac.CertificateSummaryList)
 	return total_num_certs
 }
+
 
 // ================================ List AWS certificates =================================
 func GetListOfCertificatesAWS() {
