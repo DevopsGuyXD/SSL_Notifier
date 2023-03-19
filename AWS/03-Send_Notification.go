@@ -36,7 +36,7 @@ func GetDaysLeftForExpiryAWS(cert_id []string, cert_domain_name []string, expiry
 
 		days_till_expiry := DaysToExpireAWS(i, expiry_date)
 
-		if !math.Signbit(float64(days_till_expiry)) && days_till_expiry < 365 {
+		if !math.Signbit(float64(days_till_expiry)) && days_till_expiry < 15 {
 			SendNotificationAWS(cert_id[i], cert_domain_name[i], days_till_expiry)
 		}
 	}
