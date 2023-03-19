@@ -9,13 +9,7 @@
 
 <p><b>AWS:</b></p>
 
-<p>One time execution:</p>
-
-    docker run --rm -e ACCESS_KEY_ID=" " -e ACCESS_KEY_SECRET=" " -e AWS_REGION=" " -e EMAIL_SENDER_ID=" " -e EMAIL_SENDER_PASSWORD=" " -e RECEIPIENT_MAIN=" " -e RECEIPIENT_CC_1=" " -e RECEIPIENT_CC_2=" " sslnotifier:aws
-    
-<p>CRON:</p>
-
-    docker run --rm -e ACCESS_KEY_ID=" " -e ACCESS_KEY_SECRET=" " -e AWS_REGION=" " -e EMAIL_SENDER_ID=" " -e EMAIL_SENDER_PASSWORD=" " -e RECEIPIENT_MAIN=" " -e RECEIPIENT_CC_1=" " -e RECEIPIENT_CC_2=" " -e CRON="* * * * *" devopsguyxd/sslnotifier:aws-cron
+    docker run --rm -e ACCESS_KEY_ID="AKIAYUOXBHDKW5SDQELB" -e ACCESS_KEY_SECRET="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" -e AWS_REGION="ap-south-1" -e EMAIL_SENDER_ID="nfcloudsecurity@nowfloats.com" -e EMAIL_SENDER_PASSWORD="P67%4urG123" -e RECEIPIENT_MAIN="bharath.dundi@nowfloats.com" -e RECEIPIENT_CC_1="vishal.sharma@nowfloats.com" -e RECEIPIENT_CC_2="saurabh.verma@nowfloats.com" -e IS_CRON="false" -e CRON="* * * * *" devopsguyxd/sslnotifier:aws
     
 ![2023-03-11 21_30_42-Window](https://user-images.githubusercontent.com/77780574/224494726-48f26a04-1905-4f66-8cdc-061d3bd247ab.png)
 
