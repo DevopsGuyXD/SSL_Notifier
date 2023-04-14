@@ -6,6 +6,7 @@ import (
 	"math"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 	"time"
 
@@ -36,7 +37,9 @@ func GetDaysLeftForExpiryAWS(cert_id []string, cert_domain_name []string, expiry
 
 		days_till_expiry := DaysToExpireAWS(i, expiry_date)
 
-		if !math.Signbit(float64(days_till_expiry)) && days_till_expiry < 15 {
+		days_to_notify_before_expiry, _ := strconv.Atoi(os.Getenv("DAYS_TO_NOTIFY_BEFORE_EXPIRY"))
+
+		if !math.Signbit(float64(days_till_expiry)) && days_till_expiry < days_to_notify_before_expiry {
 			SendNotificationAWS(cert_id[i], cert_domain_name[i], days_till_expiry)
 		}
 	}
@@ -73,6 +76,6 @@ func SendNotificationAWS(cert_arn string, cert_domain_name string, days_till_exp
 
 		err = d.DialAndSend(email); util.CheckForMajorErr(err)
 
-		fmt.Printf("%v: Notification sent\n", cert_arn)
+		fmt.Printf("    Notification sent: %v\n", cert_arn)
 	}
 }

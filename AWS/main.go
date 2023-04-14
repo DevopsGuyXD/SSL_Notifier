@@ -16,18 +16,11 @@ var wg sync.WaitGroup
 // =================== MAIN ===================
 func main(){
 
-	// is_cron, err := strconv.ParseBool(strings.ToLower(os.Getenv("IS_CRON"))); util.CheckForMajorErr(err)
-
 	if os.Getenv("IS_CRON") == "true"{
 		cron()
 	}else{
 		singleRun()
 	}
-}
-
-// ============= Single execution =============
-func singleRun(){
-	startCheck()
 }
 
 // =================== CRON ===================
@@ -43,6 +36,11 @@ func cron(){
 	s.StartAsync()
 
 	wg.Wait()
+}
+
+// ============= Single execution =============
+func singleRun(){
+	startCheck()
 }
 
 // =============== Start checker ==============

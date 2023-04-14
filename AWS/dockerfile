@@ -1,7 +1,7 @@
 FROM alpine:latest as alpine
     RUN apk --no-cache add tzdata zip ca-certificates
 
-FROM golang:1.19-alpine as builder
+FROM golang:1.20.3-alpine as builder
 WORKDIR /go/src/app
 
     COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
@@ -12,7 +12,7 @@ WORKDIR /go/src/app
     RUN go mod tidy
     RUN GOOS="linux" go build .
 
-FROM golang:1.19-alpine
+FROM alpine:latest
 WORKDIR /go/src/app
 
     ENV ACCESS_KEY_ID=""
@@ -20,9 +20,10 @@ WORKDIR /go/src/app
     ENV AWS_REGION=""
     ENV EMAIL_SENDER_ID=""
     ENV EMAIL_SENDER_PASSWORD=""
-    ENV RECEIPIENT_MAIN=""
-    ENV RECEIPIENT_CC_1=""
-    ENV RECEIPIENT_CC_2=""
+    ENV RECEIPIENTS=""
+    ENV DAYS_TO_NOTIFY_BEFORE_EXPIRY=""
+    ENV IS_CRON=""
+    ENV CRON=""
 
     COPY --from=builder /go/src/app/SSL_Notifier .
     COPY --from=builder /go/src/app/go.mod .

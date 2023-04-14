@@ -32,7 +32,7 @@ func GetListOfCertificatesAWS() {
 
 	var certificate *All_Certificates
 
-	fmt.Printf("Checking...\n\n")
+	fmt.Printf("  ◦ Checking...\n\n")
 	list_all_certs, err := exec.Command("aws", "acm", "list-certificates").Output(); util.CheckForMajorErr(err)
 	err = json.Unmarshal(list_all_certs, &certificate); util.CheckForMajorErr(err)
 

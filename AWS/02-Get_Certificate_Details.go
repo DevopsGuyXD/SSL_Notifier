@@ -66,7 +66,7 @@ func GetCertifcateDetailsAWS(certificate *All_Certificates) {
 		res, err := exec.Command("aws","acm","describe-certificate","--certificate-arn",certificate.CertificateSummaryList[i].CertificateArn).Output(); util.CheckForMajorErr(err)
 		json.Unmarshal(res, &certificate_details)
 
-		fmt.Printf("(%v/%v)",i+1, certificate.TotalNummberOfCertificates())
+		fmt.Printf("    (%v/%v)",i+1, certificate.TotalNummberOfCertificates())
 		fmt.Println(certificate_details.Certificate.CertificateArn)
 
 		if certificate_details.Certificate.Status == "ISSUED"{
