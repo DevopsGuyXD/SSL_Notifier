@@ -15,8 +15,6 @@
 
 <p><b>AZURE:</b></p>
 
-<p>One time execution:</p>
-
     docker run --rm -e CLIENT_ID=" " -e TENANT_ID=" " -e SECRET_VALUE=" " -e EMAIL_SENDER_ID=" " -e EMAIL_SENDER_PASSWORD=" " -e RECEIPIENTS="ABC@example.com,123@example.com,XYZ@example.com" -e DAYS_TO_NOTIFY_BEFORE_EXPIRY=" " -e IS_CRON="true | false" -e CRON="* * * * *" devopsguyxd/sslnotifier:azure
     
 ![2023-03-02 23_24_21-NowFloats-API-monitoring - Chat](https://user-images.githubusercontent.com/77780574/222514102-3aaa8fd8-e09c-428d-a0fd-a71ca851b543.png)
