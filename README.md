@@ -9,7 +9,7 @@
 
 <p><b>AWS:</b></p>
 
-    docker run --rm -e ACCESS_KEY_ID=" " -e ACCESS_KEY_SECRET=" " -e AWS_REGION=" " -e EMAIL_SENDER_ID=" " -e EMAIL_SENDER_PASSWORD=" " -e RECEIPIENTS=" " -e IS_CRON="true | false" -e CRON="* * * * *" devopsguyxd/sslnotifier:aws
+    docker run --rm -e ACCESS_KEY_ID=" " -e ACCESS_KEY_SECRET=" " -e AWS_REGION=" " -e EMAIL_SENDER_ID=" " -e EMAIL_SENDER_PASSWORD=" " -e RECEIPIENTS="ABC@example.com,123@example.com,XYZ@example.com" -e DAYS_TO_NOTIFY_BEFORE_EXPIRY="" -e IS_CRON="true | false" -e CRON="* * * * *" devopsguyxd/sslnotifier:aws
     
 ![2023-03-11 21_30_42-Window](https://user-images.githubusercontent.com/77780574/224494726-48f26a04-1905-4f66-8cdc-061d3bd247ab.png)
 
@@ -17,11 +17,7 @@
 
 <p>One time execution:</p>
 
-    docker run --rm -e CLIENT_ID=" " -e TENANT_ID=" " -e SECRET_VALUE=" " -e EMAIL_SENDER_ID=" " -e EMAIL_SENDER_PASSWORD=" " -e RECEIPIENT_MAIN=" " -e RECEIPIENT_CC_1=" " -e RECEIPIENT_CC_2=" " sslnotifier:azure
-    
-<p>CRON:</p>
-
-    docker run --rm -e CLIENT_ID=" " -e TENANT_ID=" " -e SECRET_VALUE=" " -e EMAIL_SENDER_ID=" " -e EMAIL_SENDER_PASSWORD=" " -e RECEIPIENT_MAIN=" " -e RECEIPIENT_CC_1=" " -e RECEIPIENT_CC_2=" " -e CRON="* * * * *" devopsguyxd/sslnotifier:azure-cron
+    docker run --rm -e CLIENT_ID=" " -e TENANT_ID=" " -e SECRET_VALUE=" " -e EMAIL_SENDER_ID=" " -e EMAIL_SENDER_PASSWORD=" " -e RECEIPIENTS="ABC@example.com,123@example.com,XYZ@example.com" -e DAYS_TO_NOTIFY_BEFORE_EXPIRY=" " -e IS_CRON="true | false" -e CRON="* * * * *" devopsguyxd/sslnotifier:azure
     
 ![2023-03-02 23_24_21-NowFloats-API-monitoring - Chat](https://user-images.githubusercontent.com/77780574/222514102-3aaa8fd8-e09c-428d-a0fd-a71ca851b543.png)
 
