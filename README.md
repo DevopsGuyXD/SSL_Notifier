@@ -22,8 +22,7 @@
 <br>
 <p align="center"><b>Note:</b><p>
 
-1. The notification will be sent when the certificate has less than 15 days to expire.
-2. Make sure the user has at the least "Read" access to "AWS Certificate Manager" in AWS.
-3. For Azure the service principal being used needs to have at the least "Read" access to "App Service Certificates" and "Key Vault"
-4. Make sure your email provider trusts this application in order for it to send notifications successfully to the specified email addresses.
-5. In this current version, the notification can only be sent to a main email address along with two more addresses in CC at the max.
+1. Make sure the user has at the least "Read" access to "AWS Certificate Manager" in AWS.
+2. For Azure the service principal being used needs to have at the least "Read" access to "App Service Certificates" and "Key Vault"
+3. Make sure your email provider trusts this application in order for it to send notifications successfully to the specified email addresses.
+4. In this current version, the notification can only be sent to a main email address along with two more addresses in CC at the max.
