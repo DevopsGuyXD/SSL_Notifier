@@ -26,7 +26,6 @@ WORKDIR /go/src/app
     ENV CRON=""
 
     COPY --from=builder /go/src/app/SSL_Notifier .
-    COPY --from=builder /go/src/app/go.mod .
     COPY --from=builder /go/src/app/.env .
 
     RUN apk update
