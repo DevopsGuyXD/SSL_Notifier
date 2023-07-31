@@ -41,10 +41,12 @@ func GetListOfCertificatesAzure(){
 	err = json.Unmarshal(kvs, &keyVaults); util.CheckForMajorErr(err)
 
 	for i := 0; i < len(keyVaults); i++{
-		kv_details, err := exec.Command("az","keyvault","certificate","list","--vault-name",keyVaults[i].Name).Output(); util.CheckForMajorErr(err)
-		err = json.Unmarshal(kv_details, &certificateDetails); util.CheckForMajorErr(err)
-
-		fmt.Printf("    (%v/%v) %v\n", i+1,len(keyVaults),keyVaults[i].Name)
+		kv_details, err := exec.Command("az","keyvault","certificate","list","--vault-name",keyVaults[i].Name).Output(); if err != nil{
+			fmt.Printf("    (%v/%v) %v: No access\n", i+1, len(keyVaults), keyVaults[i].Name)
+		}else{
+			err = json.Unmarshal(kv_details, &certificateDetails); util.CheckForMajorErr(err)
+			fmt.Printf("    (%v/%v) %v\n", i+1, len(keyVaults), keyVaults[i].Name)	
+		}
 
 		if len(kv_details) > 4{
 			GetDaysLeftForExpiryAzure(certificateDetails)
